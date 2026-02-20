@@ -95,7 +95,7 @@ function calculateRepayment(event) {
         const M = (P * r * Math.pow((1 + r), n)) / (Math.pow((1 + r), n) - 1); //monthly repayment
         const T = M * n; //total repayment
         //show results in the containers
-        monthlyRepayment.textContent = '<span>£</span>' + addComma(M.toFixed(2));
+        monthlyRepayment.textContent = '£' + addComma(M.toFixed(2));
         totalRepayment.textContent = '£' + addComma(T.toFixed(2));
         monthlyLabel.textContent = "Your monthly repayments";
     }
