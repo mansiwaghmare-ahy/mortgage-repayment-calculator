@@ -23,6 +23,12 @@ function restrictAndFormat(input) {
     input.value = addComma(value);
 }
 
+function preventNegative(input) {
+    if (parseFloat(input.value) < 0) {
+        input.value = '';
+    }
+}
+
 //function to call elements
 function getElements() {
     const mortgageAmt = document.querySelector('#mortgageAmt');
@@ -76,6 +82,8 @@ function calculateRepayment(event) {
     //call containers in which to show result
     const monthlyRepayment = document.querySelector('#monthlyRepayment');
     const totalRepayment = document.querySelector('#totalRepayment');
+    const monthlyLabel = document.querySelector('#monthlyLabel');
+    
 
     //prepare values in the formula
     const P = parseFloat(elements.mortgageAmt.value.replace(/,/g, '')); //loan (mortgage amount)
@@ -87,15 +95,17 @@ function calculateRepayment(event) {
         const M = (P * r * Math.pow((1 + r), n)) / (Math.pow((1 + r), n) - 1); //monthly repayment
         const T = M * n; //total repayment
         //show results in the containers
-        monthlyRepayment.textContent = addComma(M.toFixed(2));
-        totalRepayment.textContent = addComma(T.toFixed(2));
+        monthlyRepayment.textContent = '£' + addComma(M.toFixed(2));
+        totalRepayment.textContent = '£' + addComma(T.toFixed(2));
+        monthlyLabel.textContent = "Your monthly repayments";
     }
     else if (elements.mortgageType.value === "Interest Only") {
         const M = P * r; //monthly repayment
         const T = (M * n) + P; //total repayment
         //show results in the containers
-        monthlyRepayment.textContent = addComma(M.toFixed(2));
-        totalRepayment.textContent = addComma(T.toFixed(2));
+        monthlyRepayment.textContent = '£' + addComma(M.toFixed(2));
+        totalRepayment.textContent = '£' + addComma(T.toFixed(2));
+        monthlyLabel.textContent = "Your monthly interest";
     }
 
     //show result section

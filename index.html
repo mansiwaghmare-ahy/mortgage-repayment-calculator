@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
 
-    <link rel="icon" type="image/png" sizes="32x32"
-      href="favicon-32x32.png">
-    <link rel="stylesheet" href="style.css">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Frontend Mentor | Mortgage repayment calculator</title>
 
-   
-    <script src="./script.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+
+  <title>Frontend Mentor | Mortgage repayment calculator</title>
+
+
+  <script src="./script.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
     tailwind.config = {
       theme: {
         extend: {
@@ -27,7 +32,8 @@
             color: 'hsl(200, 24%, 40%)',
             inputSpan: 'hsl(202, 86%, 94%)',
             resultBox: '#0F2532',
-            spantext: 'hsl(200, 26%, 54%)'
+            spantext: 'hsl(200, 26%, 54%)',
+            resultText: 'hsl(202, 86%, 94%)'
           },
           cursor: {
             smallFist: 'url("./assets/images/small-fist.cur"), pointer',
@@ -37,136 +43,172 @@
     };
   </script>
 
-    
-    <style>
-    
+
+  <style>
+
   </style>
 
-  </head>
-  <body
-    class="font-jakarta bg-inputSpan lg:text-sm min-h-screen flex flex-col items-center justify-center">
-    <div class="bg-white lg:flex p-0 lg:w-[700px] mx-auto lg:rounded-3xl ">
+</head>
 
-     
-      <form class="p-5 flex flex-col gap-1 lg:w-1/2"
-        onsubmit="calculateRepayment(event)">
-        <div class="flex justify-between mb-4 items-center">
-          <label class="font-bold text-xl text-customBlue">Mortgage Calculator</label>
-          <label class="underline text-xs cursor-smallFist text-color"
-            onclick="clearAll()">Clear All</label>
+<body class="font-jakarta bg-inputSpan lg:text-sm min-h-screen flex flex-col items-center justify-center font-medium">
+  <div class="bg-white lg:flex p-0 lg:w-[700px] mx-auto lg:rounded-3xl ">
+
+
+    <form class="p-5 flex flex-col gap-1 lg:w-1/2" onsubmit="calculateRepayment(event)">
+      <div class="flex justify-between mb-4 items-center">
+        <label class="font-bold text-xl text-customBlue">Mortgage Calculator</label>
+        <label class="underline text-xs cursor-smallFist text-color" onclick="clearAll()">Clear All</label>
+      </div>
+
+
+      <div class="w-full mb-3">
+        <label class="text-color">Mortgage Amount</label>
+        <div id="mortgageAmtContainer"
+          class="mt-2 flex items-center border border-spantext rounded-[4px] overflow-hidden hover:border-gray-900">
+
+          <span id="mortgageAmtSpan" class="bg-inputSpan px-2 py-1 text-spantext">£</span>
+
+          <input id="mortgageAmt" type="text" oninput=restrictAndFormat(this)
+            class="flex-1 px-4 py-1 font-bold cursor-smallFist" />
         </div>
+        <label id="mortgageAmtError" class="text-red-600 text-xs hidden">This field is required</label>
+      </div>
 
-        
-        <div class="w-full mb-3">
-          <label class="text-color">Mortgage Amount</label>
-          <div id="mortgageAmtContainer"
+
+      <div class="lg:flex">
+        <div class="lg:w-1/2 lg:mr-2 mb-3">
+          <label class="text-color">Mortgage Term</label>
+          <div id="mortgageTermContainer"
             class="mt-2 flex items-center border border-spantext rounded-[4px] overflow-hidden hover:border-gray-900">
-            
-            <span id="mortgageAmtSpan" class="bg-inputSpan px-2 py-1 text-spantext">£</span>
-           
-            <input id="mortgageAmt"
-              type="text" oninput=restrictAndFormat(this)
-              class="flex-1 px-4 py-1 font-bold cursor-smallFist" />
+
+            <input id="mortgageTerm" type="number" step="any" min="1"
+              class="flex-1 px-4 py-1 lg:w-3/5 font-bold cursor-smallFist" />
+
+            <span id="mortgageTermSpan" class="bg-inputSpan px-2 py-1 text-spantext lg:px-2">years</span>
           </div>
-          <label id="mortgageAmtError" class="text-red-600 text-xs hidden">This field is required</label>
+          <label id="mortgageTermError" class="text-red-600 text-xs hidden">This field is required</label>
         </div>
 
-        
-        <div class="lg:flex">
-          <div class="lg:w-1/2 lg:mr-2 mb-3">
-            <label class="text-color">Mortgage Term</label>
-            <div id="mortgageTermContainer"
-              class="mt-2 flex items-center border border-spantext rounded-[4px] overflow-hidden hover:border-gray-900">
-             
-              <input id="mortgageTerm"
-                type="number"
-                step="any"
-                class="flex-1 px-4 py-1 lg:w-3/5 font-bold cursor-smallFist" />
-             
-              <span id="mortgageTermSpan"
-                class="bg-inputSpan px-2 py-1 text-spantext lg:px-2">years</span>
-            </div>
-            <label id="mortgageTermError" class="text-red-600 text-xs hidden">This field is required</label>
-          </div>
+        <div class="lg:w-1/2 mb-3">
+          <label class="text-color">Interest Rate</label>
+          <div id="interestRateContainer"
+            class="mt-2 flex items-center border border-spantext rounded-[4px] overflow-hidden hover:border-gray-900">
 
-          <div class="lg:w-1/2 mb-3">
-            <label class="text-color">Interest Rate</label>
-            <div id="interestRateContainer"
-              class="mt-2 flex items-center border border-spantext rounded-[4px] overflow-hidden hover:border-gray-900">
-           
-              <input id="interestRate"
-                type="number" max="100"
-                step="any"
-                class="flex-1 px-2 py-1 lg:w-4/5 font-bold cursor-smallFist" />
-              
-              <span id="interestRateSpan"
-                class="bg-inputSpan px-4 py-1 text-spantext lg:px-2">%</span>
-            </div>
-            <label id="interestRateError" class="text-red-600 text-xs hidden">This field is required</label>
+            <input id="interestRate" type="number" max="100" step="any" min="0"
+              class="flex-1 px-2 py-1 lg:w-4/5 font-bold cursor-smallFist" />
+
+            <span id="interestRateSpan" class="bg-inputSpan px-4 py-1 text-spantext lg:px-2">%</span>
           </div>
+          <label id="interestRateError" class="text-red-600 text-xs hidden">This field is required</label>
         </div>
+      </div>
 
-        
-        <div class="flex flex-col w-full">
+
+      <!-- <div class="flex flex-col w-full">
           <label class="mb-1 text-color">Mortgage Type</label>
           <div onclick="checkRadio('radio1')"
             class="cursor-smallFist mt-2 mb-2 p-2 border border-spantext rounded-[4px] hover:outline hover:outline-1 hover:outline-customYellow hover:bg-customYellow/10 hover:border-transparent">
             <input id="radio1" type="radio" name="option" value="Repayment"
-              class="mx-3 yellow-radio">
+              class="mx-3 yellow-radio accent-[hsl(61,70%,52%)] peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
+           peer-checked:bg-customYellow/10 peer-checked:border-transparent">
             <label class="ml-2 font-bold lg:text-md text-sm text-customBlue">Repayment</label>
           </div>
           <div onclick="checkRadio('radio2')"
             class="cursor-smallFist p-2 border border-spantext rounded-[4px] hover:outline hover:outline-customYellow hover:bg-customYellow/10 hover:border-transparent">
             <input id="radio2" type="radio" name="option" value="Interest Only"
-              class="mx-3 yellow-radio">
+              class="mx-3 yellow-radio accent-[hsl(61,70%,52%)]">
             <label class="ml-2 font-bold lg:text-md text-sm">Interest
               Only</label>
           </div>
           <label id="mortgageTypeError" class="text-red-600 text-xs hidden mb-3 ">This field is required</label>
-        </div>
+        </div> -->
 
-        
-        <button type="submit"
-          class="mt-5 cursor-smallFist lg:mr-auto m-2 px-6 py-3 lg:py-2 bg-customYellow rounded-full flex justify-center items-center hover:bg-customYellow/50">
-          <img src="icon-calculator.svg" class="mr-3" />
-          <span class="font-bold lg:text-md text-sm">Calculate Repayments</span>
-        </button>
+      <div class="flex flex-col w-full">
+        <label class="mb-1 text-color">Mortgage Type</label>
 
-      </form>
+        <!-- Repayment -->
+        <label class="mt-2 mb-2 cursor-smallFist">
+          <input id="radio1" type="radio" name="option" value="Repayment" class="peer hidden">
 
-      
-      <div id="image-section"
-        class="bg-customBlue lg:w-1/2 lg:rounded-bl-[50px] lg:rounded-3xl lg:rounded-tl-none flex flex-col items-center justify-center text-center p-10 m-0">
-        <img src="illustration-empty.svg" class="w-2/3 lg:w-1/2 mb-6"/>
-        <p class="font-bold text-2xl text-white mb-2">Results shown here</p>
-        <p class="text-white/70 lg:text-sm text-xs">Complete the form and click
-          “calculate
-          repayments” to see what
-          your monthly repayments would be.</p>
+          <div class="flex items-center p-2 border border-spantext rounded-[4px]
+                hover:outline hover:outline-1 hover:outline-customYellow
+                peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
+                peer-checked:bg-customYellow/10 peer-checked:border-transparent">
+
+            <span class="flex items-center">
+              <span class="w-4 h-4 inline-block rounded-full border border-gray-400
+         peer-checked:bg-[hsl(61,70%,52%)]
+         peer-checked:border-[hsl(61,70%,52%)]">
+              </span>
+              <span class="ml-3 font-bold text-sm text-customBlue">Repayment</span>
+            </span>
+          </div>
+        </label>
+
+        <!-- Interest Only -->
+        <label class="cursor-smallFist">
+          <input id="radio2" type="radio" name="option" value="Interest Only" class="peer hidden">
+
+          <div class="flex items-center p-2 border border-spantext rounded-[4px]
+                hover:outline hover:outline-1 hover:outline-customYellow
+                peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
+                peer-checked:bg-customYellow/10 peer-checked:border-transparent">
+
+            <span class="flex items-center">
+              <span class="w-4 h-4 inline-block rounded-full border border-gray-400
+         peer-checked:bg-[#32cd32]
+         peer-checked:border-[#32cd32]">
+              </span>
+              <span class="ml-3 font-bold text-sm text-customBlue">Interest Only</span>
+            </span>
+          </div>
+        </label>
+
+        <label id="mortgageTypeError" class="text-red-600 text-xs hidden mb-3">
+          This field is required
+        </label>
       </div>
 
-      
-      <div id="result-section"
-        class="hidden bg-customBlue lg:w-1/2 lg:rounded-bl-[50px] lg:rounded-3xl lg:rounded-tl-none flex-col justify-start py-6 px-8 m-0">
-        <label class="font-bold text-xl text-white mb-3">Your results</label>
-        <p class="text-white/70 text-xs">
-          Your results are shown based on the information you provided. To
-          adjust the results, edit the form and
-          click "calculate repayments" again!</p>
-        <div
-          class="bg-resultBox rounded-md border-t-4 border-t-customYellow mt-7 px-4 py-5">
-          <p class="text-white/70 text-xs mb-2">Your monthly repayments</p>
-          <label id="monthlyRepayment"
-            class="text-customYellow text-4xl font-bold">£1,797.74</label>
-          <hr class="border-t border-gray-300/40 my-6">
-          <p class="text-white/70 text-xs mb-1">Total you'll repay over the
-            term</p>
-          <label id="totalRepayment"
-            class="font-bold text-xl text-white">£539,322.94</label>
-        </div>
-      </div>
+
+      <button type="submit"
+        class="mt-5 cursor-smallFist lg:mr-auto m-2 px-6 py-3 lg:py-2 bg-customYellow rounded-full flex justify-center items-center hover:bg-customYellow/50">
+        <img src="icon-calculator.svg" class="mr-3" />
+        <span class="font-bold lg:text-md text-sm">Calculate Repayments</span>
+      </button>
+
+    </form>
+
+
+    <div id="image-section"
+      class="bg-customBlue lg:w-1/2 lg:rounded-bl-[50px] lg:rounded-3xl lg:rounded-tl-none flex flex-col items-center justify-center text-center p-10 m-0">
+      <img src="illustration-empty.svg" class="w-2/3 lg:w-1/2 mb-6" />
+      <p class="font-bold text-lg mb-2 text-resultText">Results shown here</p>
+      <p class="text-[hsl(200,26%,54%)] lg:text-[10px] text-xs leading-snug">Complete the form and click
+        “calculate
+        repayments” to see what
+        your monthly repayments would be.</p>
     </div>
 
-    
-  </body>
+
+    <div id="result-section"
+      class="hidden bg-customBlue lg:w-1/2 lg:rounded-bl-[50px] lg:rounded-3xl lg:rounded-tl-none flex-col justify-start py-6 px-8 m-0">
+      <label class="font-bold text-xl text-white mb-3">Your results</label>
+      <p class="text-white/70 text-xs">
+        Your results are shown based on the information you provided. To
+        adjust the results, edit the form and
+        click "calculate repayments" again.</p>
+      <div class="bg-resultBox rounded-md border-t-4 border-t-customYellow mt-7 px-4 py-5">
+        <p class="text-white/70 text-xs mb-2" id="monthlyLabel">Your monthly repayments</p>
+        <label id="monthlyRepayment" class="text-customYellow text-4xl font-bold">£1,797.74</label>
+        <hr class="border-t border-gray-300/40 my-6">
+        <p class="text-white/70 text-xs mb-1">Total you'll repay over the
+          term</p>
+        <label id="totalRepayment" class="font-bold text-xl text-white">£539,322.94</label>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
 </html>
