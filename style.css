@@ -4,3 +4,9 @@
     box-sizing: border-box;
 }
 
+input[type="radio"]:checked + div .w-2\.5 {
+  background-color: #D8DB2F; /* Your customYellow */
+}
+input[type="radio"]:checked + div {
+  border-color: #D8DB2F;
+}

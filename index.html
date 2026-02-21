@@ -103,64 +103,32 @@
         </div>
       </div>
 
-
-      <!-- <div class="flex flex-col w-full">
-          <label class="mb-1 text-color">Mortgage Type</label>
-          <div onclick="checkRadio('radio1')"
-            class="cursor-smallFist mt-2 mb-2 p-2 border border-spantext rounded-[4px] hover:outline hover:outline-1 hover:outline-customYellow hover:bg-customYellow/10 hover:border-transparent">
-            <input id="radio1" type="radio" name="option" value="Repayment"
-              class="mx-3 yellow-radio accent-[hsl(61,70%,52%)] peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
-           peer-checked:bg-customYellow/10 peer-checked:border-transparent">
-            <label class="ml-2 font-bold lg:text-md text-sm text-customBlue">Repayment</label>
-          </div>
-          <div onclick="checkRadio('radio2')"
-            class="cursor-smallFist p-2 border border-spantext rounded-[4px] hover:outline hover:outline-customYellow hover:bg-customYellow/10 hover:border-transparent">
-            <input id="radio2" type="radio" name="option" value="Interest Only"
-              class="mx-3 yellow-radio accent-[hsl(61,70%,52%)]">
-            <label class="ml-2 font-bold lg:text-md text-sm">Interest
-              Only</label>
-          </div>
-          <label id="mortgageTypeError" class="text-red-600 text-xs hidden mb-3 ">This field is required</label>
-        </div> -->
-
       <div class="flex flex-col w-full">
         <label class="mb-1 text-color">Mortgage Type</label>
 
-        <!-- Repayment -->
-        <label class="mt-2 mb-2 cursor-smallFist">
+        <label class="mt-2 mb-2 cursor-pointer">
           <input id="radio1" type="radio" name="option" value="Repayment" class="peer hidden">
-
-          <div class="flex items-center p-2 border border-spantext rounded-[4px]
-                hover:outline hover:outline-1 hover:outline-customYellow
-                peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
-                peer-checked:bg-customYellow/10 peer-checked:border-transparent">
-
-            <span class="flex items-center">
-              <span class="w-4 h-4 inline-block rounded-full border border-gray-400
-         peer-checked:bg-[hsl(61,70%,52%)]
-         peer-checked:border-[hsl(61,70%,52%)]">
-              </span>
-              <span class="ml-3 font-bold text-sm text-customBlue">Repayment</span>
-            </span>
+          <div class="flex items-center p-3 border border-spantext rounded-[4px] 
+                hover:border-customYellow 
+                peer-checked:border-customYellow peer-checked:bg-customYellow/10 transition-all">
+            <div class="w-4 h-4 rounded-full border border-spantext flex items-center justify-center 
+                  peer-checked:border-customYellow">
+              <div class="w-2.5 h-2.5 rounded-full bg-transparent peer-checked:bg-customYellow"></div>
+            </div>
+            <span class="ml-3 font-bold text-sm text-customBlue">Repayment</span>
           </div>
         </label>
 
-        <!-- Interest Only -->
-        <label class="cursor-smallFist">
+        <label class="cursor-pointer">
           <input id="radio2" type="radio" name="option" value="Interest Only" class="peer hidden">
-
-          <div class="flex items-center p-2 border border-spantext rounded-[4px]
-                hover:outline hover:outline-1 hover:outline-customYellow
-                peer-checked:outline peer-checked:outline-1 peer-checked:outline-customYellow
-                peer-checked:bg-customYellow/10 peer-checked:border-transparent">
-
-            <span class="flex items-center">
-              <span class="w-4 h-4 inline-block rounded-full border border-gray-400
-         peer-checked:bg-[#32cd32]
-         peer-checked:border-[#32cd32]">
-              </span>
-              <span class="ml-3 font-bold text-sm text-customBlue">Interest Only</span>
-            </span>
+          <div class="flex items-center p-3 border border-spantext rounded-[4px] 
+                hover:border-customYellow 
+                peer-checked:border-customYellow peer-checked:bg-customYellow/10 transition-all">
+            <div class="w-4 h-4 rounded-full border border-spantext flex items-center justify-center 
+                  peer-checked:border-customYellow">
+              <div class="w-2.5 h-2.5 rounded-full bg-transparent peer-checked:bg-customYellow"></div>
+            </div>
+            <span class="ml-3 font-bold text-sm text-customBlue">Interest Only</span>
           </div>
         </label>
 
